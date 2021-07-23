@@ -7,8 +7,6 @@ Actividad 2 de programación 2
 
 **Fase I** 
 
-**Valor: 1 punto** 
-
 Escriba un programa en lenguaje JAVA que permite el análisis de un texto ingresado por el usuario mediante teclado o desde un archivo de texto (.txt) como se muestra a continuación: 
 
 ![](Aspose.Words.75866d4b-b1f0-4838-9617-75da0c046884.002.jpeg)
@@ -59,8 +57,6 @@ Con el objetivo de apoyar en la realización de esta actividad, describo a conti
 - Clase File 
 
 **Fase II** 
-
-**Valor: 1 punto** 
 
 **Documentación** 
 
