@@ -17,6 +17,9 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
     }
 
+    private void menu(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -64,9 +68,18 @@ public class Principal extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jLabel18 = new javax.swing.JLabel();
+        Menu = new javax.swing.JMenuBar();
+        fileOption = new javax.swing.JMenu();
+        ItemAbrir = new javax.swing.JMenuItem();
+        ItemGuardar = new javax.swing.JMenuItem();
+        ItemGuardarF = new javax.swing.JMenuItem();
+        editOption = new javax.swing.JMenu();
+        ItemCopy = new javax.swing.JMenuItem();
+        ItemCut = new javax.swing.JMenuItem();
+        ItemPegar = new javax.swing.JMenuItem();
+        ItemBuscar = new javax.swing.JMenuItem();
+        ItemReemplazar = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,8 +92,11 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel1.setText("MANEJO DE CADENAS");
 
         jTextArea1.setColumns(20);
@@ -154,19 +170,96 @@ public class Principal extends javax.swing.JFrame {
 
         txtImpar.setText(" ");
 
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel17.setText("TRADUCCIÓN A CLAVE MURCIELAGO");
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jLabel18.setText("Ingrese un texto o abra un archivo");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        fileOption.setText("Archivo");
 
-        setJMenuBar(jMenuBar1);
+        ItemAbrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        ItemAbrir.setText("Abrir");
+        ItemAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemAbrirActionPerformed(evt);
+            }
+        });
+        fileOption.add(ItemAbrir);
+
+        ItemGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        ItemGuardar.setText("Guardar");
+        ItemGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemGuardarActionPerformed(evt);
+            }
+        });
+        fileOption.add(ItemGuardar);
+
+        ItemGuardarF.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, 0));
+        ItemGuardarF.setText("Guardar como");
+        ItemGuardarF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemGuardarFActionPerformed(evt);
+            }
+        });
+        fileOption.add(ItemGuardarF);
+
+        Menu.add(fileOption);
+
+        editOption.setText("Editar");
+
+        ItemCopy.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        ItemCopy.setText("Copiar");
+        ItemCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemCopyActionPerformed(evt);
+            }
+        });
+        editOption.add(ItemCopy);
+
+        ItemCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        ItemCut.setText("Cortar");
+        ItemCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemCutActionPerformed(evt);
+            }
+        });
+        editOption.add(ItemCut);
+
+        ItemPegar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        ItemPegar.setText("Pegar");
+        ItemPegar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemPegarActionPerformed(evt);
+            }
+        });
+        editOption.add(ItemPegar);
+
+        ItemBuscar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        ItemBuscar.setText("Buscar");
+        ItemBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemBuscarActionPerformed(evt);
+            }
+        });
+        editOption.add(ItemBuscar);
+
+        ItemReemplazar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        ItemReemplazar.setText("Reemplazar");
+        ItemReemplazar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemReemplazarActionPerformed(evt);
+            }
+        });
+        editOption.add(ItemReemplazar);
+
+        Menu.add(editOption);
+
+        setJMenuBar(Menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,9 +268,23 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel18)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -190,12 +297,12 @@ public class Principal extends javax.swing.JFrame {
                                                 .addComponent(jLabel9)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtlongitud, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                                            .addComponent(txtlongitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(txtUltimaLetra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(txtLetraCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(txtPrimeraPalabra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(txtPalabraCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtUltimaPalabra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(txtUltimaPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -203,7 +310,7 @@ public class Principal extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtpalabra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(txtpalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -233,29 +340,23 @@ public class Principal extends javax.swing.JFrame {
                                             .addComponent(txtO, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtImpar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(245, 245, 245)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(208, 208, 208)
+                                .addGap(196, 196, 196)
                                 .addComponent(jLabel17)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 15, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jScrollPane2))))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(264, 264, 264)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
@@ -309,7 +410,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -317,7 +418,40 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        new ReadFile().lecturaArchivo("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ItemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemAbrirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemAbrirActionPerformed
+
+    private void ItemGuardarFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGuardarFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemGuardarFActionPerformed
+
+    private void ItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCopyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemCopyActionPerformed
+
+    private void ItemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemGuardarActionPerformed
+
+    private void ItemCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemCutActionPerformed
+
+    private void ItemPegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemPegarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemPegarActionPerformed
+
+    private void ItemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemBuscarActionPerformed
+
+    private void ItemReemplazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemReemplazarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemReemplazarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -355,6 +489,17 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ItemAbrir;
+    private javax.swing.JMenuItem ItemBuscar;
+    private javax.swing.JMenuItem ItemCopy;
+    private javax.swing.JMenuItem ItemCut;
+    private javax.swing.JMenuItem ItemGuardar;
+    private javax.swing.JMenuItem ItemGuardarF;
+    private javax.swing.JMenuItem ItemPegar;
+    private javax.swing.JMenuItem ItemReemplazar;
+    private javax.swing.JMenuBar Menu;
+    private javax.swing.JMenu editOption;
+    private javax.swing.JMenu fileOption;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -365,6 +510,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -373,9 +519,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
