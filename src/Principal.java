@@ -1,9 +1,13 @@
+
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author KORTIZ
@@ -13,13 +17,31 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    private String nameFile = "";
+
     public Principal() {
         initComponents();
     }
 
-    private void menu(){
-        
+    private void seleccionarRutaArchivo() {
+        JFileChooser ubicacion = new JFileChooser();
+        ubicacion.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter(".txt", "txt");
+        ubicacion.setFileFilter(filtro);
+        int result = ubicacion.showOpenDialog(this);
+        if (result != JFileChooser.CANCEL_OPTION) {
+            File nombreArchivo = ubicacion.getSelectedFile();
+            if (nombreArchivo != null && !nombreArchivo.getName().equals("")) {
+                if (!nombreArchivo.getName().endsWith(".txt")) {
+                    nameFile = nombreArchivo.getAbsolutePath() + ".txt";
+                } else {
+                    nameFile = nombreArchivo.getAbsolutePath();
+                }
+            }
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,7 +55,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtData = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -67,7 +89,7 @@ public class Principal extends javax.swing.JFrame {
         txtImpar = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txtTraduccion = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
         fileOption = new javax.swing.JMenu();
@@ -99,9 +121,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel1.setText("MANEJO DE CADENAS");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtData.setColumns(20);
+        txtData.setRows(5);
+        jScrollPane1.setViewportView(txtData);
 
         jButton1.setText("Procesar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -173,9 +195,10 @@ public class Principal extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel17.setText("TRADUCCIÓN A CLAVE MURCIELAGO");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        txtTraduccion.setEditable(false);
+        txtTraduccion.setColumns(20);
+        txtTraduccion.setRows(5);
+        jScrollPane2.setViewportView(txtTraduccion);
 
         jLabel18.setText("Ingrese un texto o abra un archivo");
 
@@ -418,15 +441,20 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new ReadFile().lecturaArchivo("");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ItemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemAbrirActionPerformed
         // TODO add your handling code here:
+        seleccionarRutaArchivo();
+        String dataFile = new ReadFile().lecturaArchivo(nameFile);
+        txtData.setText(dataFile);
     }//GEN-LAST:event_ItemAbrirActionPerformed
 
     private void ItemGuardarFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGuardarFActionPerformed
         // TODO add your handling code here:
+        seleccionarRutaArchivo();
+        new ReadFile().guardarArchivo(nameFile, txtData.getText());
     }//GEN-LAST:event_ItemGuardarFActionPerformed
 
     private void ItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCopyActionPerformed
@@ -435,6 +463,10 @@ public class Principal extends javax.swing.JFrame {
 
     private void ItemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGuardarActionPerformed
         // TODO add your handling code here:
+        if (nameFile.isEmpty()) {
+            seleccionarRutaArchivo();
+        }
+        new ReadFile().guardarArchivo(nameFile, txtData.getText());
     }//GEN-LAST:event_ItemGuardarActionPerformed
 
     private void ItemCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCutActionPerformed
@@ -523,9 +555,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel txtA;
+    private javax.swing.JTextArea txtData;
     private javax.swing.JLabel txtE;
     private javax.swing.JLabel txtI;
     private javax.swing.JLabel txtImpar;
@@ -535,6 +566,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel txtPar;
     private javax.swing.JLabel txtPrimerLetra;
     private javax.swing.JLabel txtPrimeraPalabra;
+    private javax.swing.JTextArea txtTraduccion;
     private javax.swing.JLabel txtU1;
     private javax.swing.JLabel txtUltimaLetra;
     private javax.swing.JLabel txtUltimaPalabra;
