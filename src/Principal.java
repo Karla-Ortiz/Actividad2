@@ -13,8 +13,18 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    controller controlador=new controller();
     public Principal() {
-        initComponents();
+     //   initComponents();
+        System.out.println("pares: "+controlador.palabrasPares("hola karla te gusta el cafe?"));
+        System.out.println("impares: "+controlador.palabrasImpares("hola karla te gusta el cafe?"));
+        System.out.println("primera letra: "+controlador.primeraLetra("hola karla te gusta el cafe?"));
+        System.out.println("ultima letra: "+controlador.ultimaLetra("hola karla te gusta el cafe?"));
+        System.out.println("letra central: "+controlador.letraCentral("hola karla te gusta el cafe?"));
+        System.out.println("primera palabra: "+controlador.primeraPalabra("hola karla te gusta el cafe?"));
+        System.out.println("ultima palabra: "+controlador.ultimaPalabra("hola karla te gusta el cafe?"));
+        System.out.println("palabra central: "+controlador.palabraCentral("hola karla te gusta el cafe?"));
+        
     }
 
     private void menu() {

@@ -1,4 +1,7 @@
 
+import java.util.List;
+import java.util.LinkedList;
+
 /**
  *
  * @author KORTIZ
@@ -88,6 +91,8 @@ public class controller {
      */
     public int howmany(String txt, String v) {
         int cont = 0;
+        txt = notNull(txt);
+        v = notNull(v);
         for (int i = 0; i < txt.length(); i++) {
             if (txt.codePointAt(i) == v.codePointAt(0)) {
                 cont++;
@@ -95,4 +100,81 @@ public class controller {
         }
         return cont;
     }
+
+    private boolean isPar(String var) {
+        return notNull(var).length() % 2 == 0;
+    }
+
+    public String palabrasPares(String txt) {
+        txt = notNull(txt);
+        String pares = "";
+        for (String v : txt.split(" ")) {
+            if (isPar(v)) {
+                pares += " " + v;
+            }
+        }
+        return pares;
+
+    }
+
+    public String palabrasImpares(String txt) {
+        txt = notNull(txt);
+        String pares = "";
+        for (String v : txt.split(" ")) {
+            if (!isPar(v)) {
+                pares += " " + v;
+            }
+        }
+        return pares;
+    }
+
+    public String primeraLetra(String txt) {
+        txt = notNull(txt);
+        if (!txt.isEmpty()) {
+            return txt.substring(0, 1);
+        }
+        return txt;
+    }
+
+    public String ultimaLetra(String txt) {
+        txt = notNull(txt);
+        if (!txt.isEmpty()) {
+            return txt.substring(txt.length() - 1, txt.length());
+        }
+        return txt;
+    }
+
+    public String letraCentral(String txt) {
+        txt = notNull(txt);
+        if (!txt.isEmpty()) {
+            return txt.substring(txt.length() / 2 - 1, txt.length() / 2);
+        }
+        return txt;
+    }
+
+    public int cantidadDePalabra(String txt) {
+        return txt.split(" ").length;
+    }
+
+    public int longitud(String txt) {
+        return txt.length();
+    }
+
+    public String primeraPalabra(String txt) {
+        txt = notNull(txt);
+        return txt.split(" ").length > 0 ? txt.split(" ")[0] : "";
+    }
+
+    public String ultimaPalabra(String txt) {
+        txt = notNull(txt);
+        int size = txt.split(" ").length;
+        return txt.split(" ").length > 0 ? txt.split(" ")[size - 1] : "";
+    }
+
+    public String palabraCentral(String txt) {
+        txt = notNull(txt);
+        int size = txt.split(" ").length;
+        return txt.split(" ").length > 0 ? txt.split(" ")[size / 2] : "";
+    }
+
 }
