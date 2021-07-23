@@ -24,7 +24,7 @@ public class controller {
      * @param c
      * @return
      */
-    public char reemplace(char c) {
+    private char reemplace(char c) {
         switch (c) {
             case 'M':
                 return '0';
@@ -46,6 +46,26 @@ public class controller {
                 return '8';
             case 'O':
                 return '9';
+            case 'm':
+                return '0';
+            case 'u':
+                return '1';
+            case 'r':
+                return '2';
+            case 'c':
+                return '3';
+            case 'i':
+                return '4';
+            case 'e':
+                return '5';
+            case 'l':
+                return '6';
+            case 'a':
+                return '7';
+            case 'g':
+                return '8';
+            case '0':
+                return '9';
             default:
                 return c;
         }
@@ -58,5 +78,21 @@ public class controller {
      */
     private String notNull(String var) {
         return var != null ? var.trim() : "";
+    }
+
+    /**
+     *
+     * @param txt
+     * @param v
+     * @return
+     */
+    public int howmany(String txt, String v) {
+        int cont = 0;
+        for (int i = 0; i < txt.length(); i++) {
+            if (txt.codePointAt(i) == v.codePointAt(0)) {
+                cont++;
+            }
+        }
+        return cont;
     }
 }

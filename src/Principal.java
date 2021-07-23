@@ -17,8 +17,8 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
     }
 
-    private void menu(){
-        
+    private void menu() {
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
