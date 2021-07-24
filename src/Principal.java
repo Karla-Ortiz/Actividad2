@@ -1,5 +1,8 @@
 
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
+import javafx.scene.input.KeyCode;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -20,18 +23,45 @@ public class Principal extends javax.swing.JFrame {
     controller controlador = new controller();
 
     private String nameFile = "";
+    private String textoCopiado = "";
 
     public Principal() {
         initComponents();
-        System.out.println("pares: " + controlador.palabrasPares("hola karla te gusta el cafe?"));
-        System.out.println("impares: " + controlador.palabrasImpares("hola karla te gusta el cafe?"));
-        System.out.println("primera letra: " + controlador.primeraLetra("hola karla te gusta el cafe?"));
-        System.out.println("ultima letra: " + controlador.ultimaLetra("hola karla te gusta el cafe?"));
-        System.out.println("letra central: " + controlador.letraCentral("hola karla te gusta el cafe?"));
-        System.out.println("primera palabra: " + controlador.primeraPalabra("hola karla te gusta el cafe?"));
-        System.out.println("ultima palabra: " + controlador.ultimaPalabra("hola karla te gusta el cafe?"));
-        System.out.println("palabra central: " + controlador.palabraCentral("hola karla te gusta el cafe?"));
+    }
 
+    private void eventosTecla(KeyEvent evt) {
+        if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_A) {
+            seleccionarRutaArchivo();
+            String dataFile = new ReadFile().lecturaArchivo(nameFile);
+            txtData.setText(dataFile);
+        }
+        if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_G) {
+            if (nameFile.isEmpty()) {
+                seleccionarRutaArchivo();
+            }
+            new ReadFile().guardarArchivo(nameFile, txtData.getText());
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            seleccionarRutaArchivo();
+            new ReadFile().guardarArchivo(nameFile, txtData.getText());
+        }
+        if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_C) {
+            textoCopiado = txtData.getSelectedText();
+        }
+        if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_X) {
+            textoCopiado = txtData.getSelectedText();
+            String textNuevo = txtData.getText().replace(textoCopiado, "");
+            txtData.setText(textNuevo);
+        }
+        if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_P) {
+            txtData.append(textoCopiado);
+        }
+        if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_B) {
+
+        }
+        if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_R) {
+
+        }
     }
 
     private void seleccionarRutaArchivo() {
@@ -128,12 +158,22 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel1.setText("MANEJO DE CADENAS");
 
         txtData.setColumns(20);
         txtData.setRows(5);
+        txtData.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDataKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtData);
 
         jButton1.setText("Procesar");
@@ -452,7 +492,28 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
+        String texto = txtData.getText();
+        txtlongitud.setText(String.valueOf(controlador.longitud(texto)));
+        txtpalabra.setText(String.valueOf(controlador.cantidadDePalabra(texto)));
+        txtPrimerLetra.setText(controlador.primeraLetra(texto));
+        txtUltimaLetra.setText(controlador.ultimaLetra(texto));
+        txtLetraCentral.setText(controlador.letraCentral(texto));
+        txtPrimeraPalabra.setText(controlador.primeraPalabra(texto));
+        txtPalabraCentral.setText(controlador.palabraCentral(texto));
+        txtUltimaPalabra.setText(controlador.ultimaPalabra(texto));
+        int cantidadA = controlador.howmany(texto, "A") + controlador.howmany(texto, "a") + controlador.howmany(texto, "Á") + controlador.howmany(texto, "á");
+        int cantidadE = controlador.howmany(texto, "E") + controlador.howmany(texto, "e") + controlador.howmany(texto, "É") + controlador.howmany(texto, "é");
+        int cantidadI = controlador.howmany(texto, "I") + controlador.howmany(texto, "i") + controlador.howmany(texto, "Í") + controlador.howmany(texto, "í");
+        int cantidadO = controlador.howmany(texto, "O") + controlador.howmany(texto, "o") + controlador.howmany(texto, "Ó") + controlador.howmany(texto, "ó");
+        int cantidadU = controlador.howmany(texto, "U") + controlador.howmany(texto, "u") + controlador.howmany(texto, "Ú") + controlador.howmany(texto, "ú");
+        txtA.setText(String.valueOf(cantidadA));
+        txtE.setText(String.valueOf(cantidadE));
+        txtI.setText(String.valueOf(cantidadI));
+        txtO.setText(String.valueOf(cantidadO));
+        txtU1.setText(String.valueOf(cantidadU));
+        txtPar.setText(String.valueOf(controlador.palabrasPares(texto)));
+        txtImpar.setText(String.valueOf(controlador.palabrasImpares(texto)));
+        txtTraduccion.setText(controlador.codigomurcielago(texto));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ItemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemAbrirActionPerformed
@@ -470,6 +531,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void ItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCopyActionPerformed
         // TODO add your handling code here:
+        textoCopiado = txtData.getSelectedText();
     }//GEN-LAST:event_ItemCopyActionPerformed
 
     private void ItemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGuardarActionPerformed
@@ -482,10 +544,14 @@ public class Principal extends javax.swing.JFrame {
 
     private void ItemCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCutActionPerformed
         // TODO add your handling code here:
+        textoCopiado = txtData.getSelectedText();
+        String textNuevo = txtData.getText().replace(textoCopiado, "");
+        txtData.setText(textNuevo);
     }//GEN-LAST:event_ItemCutActionPerformed
 
     private void ItemPegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemPegarActionPerformed
         // TODO add your handling code here:
+        txtData.append(textoCopiado);
     }//GEN-LAST:event_ItemPegarActionPerformed
 
     private void ItemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemBuscarActionPerformed
@@ -495,6 +561,16 @@ public class Principal extends javax.swing.JFrame {
     private void ItemReemplazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemReemplazarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ItemReemplazarActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formKeyPressed
+
+    private void txtDataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyPressed
+        // TODO add your handling code here:
+        eventosTecla(evt);
+    }//GEN-LAST:event_txtDataKeyPressed
 
     /**
      * @param args the command line arguments

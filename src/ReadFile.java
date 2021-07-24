@@ -54,7 +54,7 @@ public class ReadFile {
         boolean guardado = false;
         FileWriter fw = null;
         try {
-            fw = new FileWriter(ruta, true);
+            fw = new FileWriter(ruta);
             PrintWriter archivo = new PrintWriter(fw);
             archivo.print(info);
         } catch (Exception ex) {

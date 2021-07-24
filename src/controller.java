@@ -67,8 +67,18 @@ public class controller {
                 return '7';
             case 'g':
                 return '8';
-            case '0':
+            case 'o':
                 return '9';
+            case 'ó':
+                return '9';
+            case 'á':
+                return '7';
+            case 'é':
+                return '5';
+            case 'í':
+                return '4';
+            case 'ú':
+                return '1';
             default:
                 return c;
         }
@@ -105,27 +115,27 @@ public class controller {
         return notNull(var).length() % 2 == 0;
     }
 
-    public String palabrasPares(String txt) {
+    public int palabrasPares(String txt) {
         txt = notNull(txt);
-        String pares = "";
+        int pares = 0;
         for (String v : txt.split(" ")) {
             if (isPar(v)) {
-                pares += " " + v;
+                pares ++;
             }
         }
         return pares;
 
     }
 
-    public String palabrasImpares(String txt) {
+    public int palabrasImpares(String txt) {
         txt = notNull(txt);
-        String pares = "";
+        int impares = 0;
         for (String v : txt.split(" ")) {
             if (!isPar(v)) {
-                pares += " " + v;
+                impares ++;
             }
         }
-        return pares;
+        return impares;
     }
 
     public String primeraLetra(String txt) {
