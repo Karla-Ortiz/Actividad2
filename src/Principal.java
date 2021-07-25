@@ -3,7 +3,13 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import javafx.scene.input.KeyCode;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
@@ -24,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
 
     private String nameFile = "";
     private String textoCopiado = "";
+    public String textReem = "";
 
     public Principal() {
         initComponents();
@@ -57,10 +64,34 @@ public class Principal extends javax.swing.JFrame {
             txtData.append(textoCopiado);
         }
         if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_B) {
-
+            String buscar = JOptionPane.showInputDialog("Ingrese texto a buscar");
+            if (txtData.getText().contains(buscar)) {
+                txtData.setSelectionStart(txtData.getText().indexOf(buscar));
+                int fin = txtData.getText().indexOf(buscar) + buscar.length();
+                txtData.setSelectionEnd(fin);
+            }
         }
         if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_R) {
+            final JTextField buscar = new JTextField(10);
+            final JTextField reemplazar = new JTextField(10);
+            JPanel pane = new JPanel();
+            pane.add(new JLabel("Ingrese texto a buscar"));
+            pane.add(buscar);
+            pane.add(new JLabel("Ingrese texto para reemplazar"));
+            pane.add(reemplazar);
 
+            int reply = JOptionPane.showConfirmDialog(null, pane, "Buscar y reemplazar",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (reply == JOptionPane.OK_OPTION) {
+                String textBuscar = buscar.getText();
+                String textReem = reemplazar.getText();
+                System.out.println("user name: " + textBuscar);
+                System.out.println("passowrd:  " + textReem);
+
+                while (txtData.getText().contains(textBuscar)) {
+                    txtData.setText(txtData.getText().replaceAll(textBuscar, textReem));
+                }
+            }
         }
     }
 
@@ -556,10 +587,36 @@ public class Principal extends javax.swing.JFrame {
 
     private void ItemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemBuscarActionPerformed
         // TODO add your handling code here:
+        String buscar = JOptionPane.showInputDialog("Ingrese texto a buscar");
+        if (txtData.getText().contains(buscar)) {
+            txtData.setSelectionStart(txtData.getText().indexOf(buscar));
+            int fin = txtData.getText().indexOf(buscar) + buscar.length();
+            txtData.setSelectionEnd(fin);
+        }
     }//GEN-LAST:event_ItemBuscarActionPerformed
 
     private void ItemReemplazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemReemplazarActionPerformed
         // TODO add your handling code here:
+        final JTextField buscar = new JTextField(10);
+        final JTextField reemplazar = new JTextField(10);
+        JPanel pane = new JPanel();
+        pane.add(new JLabel("Ingrese texto a buscar"));
+        pane.add(buscar);
+        pane.add(new JLabel("Ingrese texto para reemplazar"));
+        pane.add(reemplazar);
+
+        int reply = JOptionPane.showConfirmDialog(null, pane, "Buscar y reemplazar",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (reply == JOptionPane.OK_OPTION) {
+            String textBuscar = buscar.getText();
+            String textReem = reemplazar.getText();
+            System.out.println("user name: " + textBuscar);
+            System.out.println("passowrd:  " + textReem);
+
+            while (txtData.getText().contains(textBuscar)) {
+                txtData.setText(txtData.getText().replaceAll(textBuscar, textReem));
+            }
+        }
     }//GEN-LAST:event_ItemReemplazarActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
