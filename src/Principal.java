@@ -85,8 +85,6 @@ public class Principal extends javax.swing.JFrame {
             if (reply == JOptionPane.OK_OPTION) {
                 String textBuscar = buscar.getText();
                 String textReem = reemplazar.getText();
-                System.out.println("user name: " + textBuscar);
-                System.out.println("passowrd:  " + textReem);
 
                 while (txtData.getText().contains(textBuscar)) {
                     txtData.setText(txtData.getText().replaceAll(textBuscar, textReem));
