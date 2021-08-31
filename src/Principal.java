@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
 
     private String nameFile = "";
     private String textoCopiado = "";
-    public String textReem = "";
+    public String textReem = "OtroTexto";
 
     public Principal() {
         initComponents();
